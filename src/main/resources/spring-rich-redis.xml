@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+       default-autowire="byName">
+
+    <!--redis config-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="1000"/>
+        <property name="minIdle" value="100"/>
+        <property name="maxTotal" value="50"/>
+        <property name="maxWaitMillis" value="10000"/>
+        <!--<property name="testOnBorrow" value="true"/>-->
+        <property name="testWhileIdle" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="600000"/>
+    </bean>
+
+    <!--redis client-->
+    <bean id="jedisShardInfo" class="redis.clients.jedis.JedisShardInfo">
+        <constructor-arg index="0" value="localhost"/>
+        <constructor-arg index="1" value="6378" type="int"/>
+    </bean>
+
+    <!--redis pool-->
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1">
+            <list>
+                <ref bean="jedisShardInfo"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!--redis util-->
+    <bean id="redisUtil" class="com.cenyol.example.utils.RedisUtil">
+        <property name="shardedJedisPool" ref="shardedJedisPool"/>
+        <property name="use" value="${redis.useCache}"/>
+        <property name="defaultExpireTime" value="${redis.defaultExpireTime}"/>
+    </bean>
+</beans>
