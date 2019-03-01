@@ -3,18 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
-    <!-- 加载属性文件 -->
-    <properties resource="db.properties">
-        <!--properties中还可以配置一些属性名和属性值  -->
-        <!-- <property name="jdbc.driver" value=""/> -->
-    </properties>
     <typeAliases>
         <package name="com.cenyol.example.model"/>
     </typeAliases>
 
-    <!-- 加载映射文件-->
     <mappers>
-        <mapper resource="classpath:sqlmap/UrlInfo.xml"/>
+        <mapper resource="sqlmap/UrlInfo.xml"/>
     </mappers>
 </configuration>

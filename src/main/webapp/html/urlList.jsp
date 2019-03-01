@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -28,21 +29,47 @@
 </head>
 <body>
 <div class="container">
-  <h1>test Addurl</h1>
+  <h1>SpringMVC url</h1>
   <hr/>
-  <form:form action="/api/addurlPost" method="post" commandName="url" role="form">
-    <div class="form-group">
-      <label for="longUrl">longUrl:</label>
-      <input type="text" class="form-control" id="longUrl" name="longUrl" placeholder="Enter longUrl:"/>
-    </div>
-    <div class="form-group">
-      <label for="shortUrl">shortUrl:</label>
-      <input type="text" class="form-control" id="shortUrl" name="shortUrl" placeholder="Enter shortUrl:"/>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-sm btn-success">提交</button>
-    </div>
-  </form:form>
+
+  <h3>urlList <a href="/addUrl" type="button" class="btn btn-default btn-sm">添加</a></h3>
+
+  <!-- 如果用户列表为空 -->
+  <c:if test="${empty urlList}">
+    <p class="bg-warning">
+      <br/>
+      User表为空，请<a href="/addUrl" type="button" class="btn btn-default btn-sm">添加</a>
+      <br/>
+      <br/>
+    </p>
+  </c:if>
+
+  <!-- 如果用户列表非空 -->
+  <c:if test="${!empty urlList}">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID</th>
+        <th>longUrl</th>
+        <th>shortUrl</th>
+        <th>num</th>
+        <th>操作</th>
+      </tr>
+
+      <c:forEach items="${urlList}" var="url">
+        <tr>
+          <td>${url.id}</td>
+          <td>${url.longUrl}</td>
+          <td>${url.shortUrl}</td>
+          <td>${url.num}</td>
+          <td>
+            <a href="/showUser/${url.id}" type="button" class="btn btn-sm btn-success">详情</a>
+            <a href="/updateUser/${url.id}" type="button" class="btn btn-sm btn-warning">修改</a>
+            <a href="/deleteUser/${url.id}" type="button" class="btn btn-sm btn-danger">删除</a>
+          </td>
+        </tr>
+      </c:forEach>
+    </table>
+  </c:if>
 </div>
 
 

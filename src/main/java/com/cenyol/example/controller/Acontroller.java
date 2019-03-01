@@ -1,6 +1,9 @@
 package com.cenyol.example.controller;
 
+import com.cenyol.example.model.UrlInfo;
+import com.cenyol.example.repository.UrlDao;
 import com.cenyol.example.utils.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +20,14 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/a")
 public class Acontroller {
+    private static final String prefix = "http://localhost/a/";
+
+    @Autowired
+    UrlDao urlDao;
 
     /**
      * 跳转及次数统计
+     *
      * @param url
      * @param response
      * @throws IOException
@@ -28,7 +36,7 @@ public class Acontroller {
     @ResponseBody
     public void url(@PathVariable String url, HttpServletResponse response) throws IOException {
         //得到url
-
+        url = prefix + url;
         //统计次数,写redis
         RedisUtil redisUtil = new RedisUtil();
         //    SET page_view 20
@@ -38,9 +46,10 @@ public class Acontroller {
         } else {
             redisUtil.set(url, "0");
         }
-
+        UrlInfo urlInfo = urlDao.getEntryByShortKey(url);
+        String longUrl = urlInfo.getLongUrl();
         //重定向
-        response.sendRedirect("/");
+        response.sendRedirect(longUrl);
     }
 
 

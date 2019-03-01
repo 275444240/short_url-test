@@ -8,8 +8,17 @@
 <mapper namespace="test">
 
     <insert id="insert" parameterType="com.cenyol.example.model.UrlInfo">
-        insert into url_info(long_url,short_url) values (
-        #{longUrl},#{shortUrl}
+        insert into url_info(long_url,short_url,yn) values (
+        #{longUrl},#{shortUrl},1
         )
     </insert>
+
+    <select id="selectAll" resultType="com.cenyol.example.model.UrlInfo">
+        select id,long_url,short_url from url_info  where yn!=-1
+    </select>
+
+    <select id="getEntryByShortKey" parameterType="java.lang.String" resultType="com.cenyol.example.model.UrlInfo">
+    select id,long_url,short_url from url_info  where yn!=-1
+        and short_url=#{url}
+    </select>
 </mapper>

@@ -5,9 +5,27 @@ package com.cenyol.example.model;
  * @date 2019/2/28 0028
  */
 public class UrlInfo {
-  private Integer  id;
-  private String  longUrl;
-  private String  shortUrl;
+    private Integer id;
+    private String longUrl;
+    private String shortUrl;
+    private Integer num;
+    private Integer yn;
+
+    public Integer getYn() {
+        return yn;
+    }
+
+    public void setYn(Integer yn) {
+        this.yn = yn;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
 
     public Integer getId() {
         return id;
@@ -35,10 +53,11 @@ public class UrlInfo {
 
     @Override
     public String toString() {
-        return "urlInfo{" +
+        return "UrlInfo{" +
                 "id=" + id +
                 ", longUrl='" + longUrl + '\'' +
                 ", shortUrl='" + shortUrl + '\'' +
+                ", num=" + num +
                 '}';
     }
 }

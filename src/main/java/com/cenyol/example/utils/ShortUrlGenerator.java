@@ -48,19 +48,7 @@ public class ShortUrlGenerator {
         return resUrl;
     }
 
-    /**
-     * 用户自定义
-     * @param url
-     * @param url1
-     * @return
-     */
-    public static String[] getuserDefineShortUrl(String url,String url1) {
-        int i = url.lastIndexOf("/");
-        int length = url.toCharArray().length;
-        String substring = url.substring(i+1, length);
-        String replace = url.replace(substring, url1);
-        return new String[]{replace};
-    }
+
 
     private static String getMD5(String str) {
         try {
@@ -85,10 +73,8 @@ public class ShortUrlGenerator {
     public static void main(String[] args) {
         // 长连接：http://www.cnblogs.com/zdz8207/
         String sLongUrl = "http://localhost/2131232111223/1232112";
-        String[] aResult = getuserDefineShortUrl(sLongUrl,"123");
-        for (int i = 0; i < aResult.length; i++) {
-            System.out.println(aResult[i]);
-        }
+        String shortKey = getShortKey(sLongUrl);
+
         //根据短链接获得key值
         String key = getShortKey("http://localhost/FjIjqm");
         System.out.println("key=" + key);//key=FjIjqm
