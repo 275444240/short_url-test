@@ -4,7 +4,7 @@ package com.cenyol.example.model;
  * @author yuan.luo
  * @date 2019/2/28 0028
  */
-public class urlInfo {
+public class UrlInfo {
   private Integer  id;
   private String  longUrl;
   private String  shortUrl;

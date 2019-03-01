@@ -2,10 +2,11 @@
   Created by IntelliJ IDEA.
   User: sjj
   Date: 2015/10/24 0024
-  Time: 20:28
+  Time: 20:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -13,7 +14,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-  <title>SpringMVC 用户详情</title>
+  <title>test 添加url</title>
 
   <!-- 新 Bootstrap 核心 CSS 文件 -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -27,27 +28,21 @@
 </head>
 <body>
 <div class="container">
-  <h1>SpringMVC 用户详情</h1>
+  <h1>test Addurl</h1>
   <hr/>
-
-  <table class="table tavble-bordered table-striped">
-    <tr>
-      <th>ID</th>
-      <td>${user.id}</td>
-    </tr>
-    <tr>
-      <th>First Name</th>
-      <td>${user.firstName}</td>
-    </tr>
-    <tr>
-      <th>Last Name</th>
-      <td>${user.lastName}</td>
-    </tr>
-    <tr>
-      <th>Password</th>
-      <td>${user.password}</td>
-    </tr>
-  </table>
+  <form:form action="/addurlPost" method="post" commandName="url" role="form">
+    <div class="form-group">
+      <label for="longUrl">longUrl:</label>
+      <input type="text" class="form-control" id="longUrl" name="longUrl" placeholder="Enter longUrl:"/>
+    </div>
+    <div class="form-group">
+      <label for="shortUrl">shortUrl:</label>
+      <input type="text" class="form-control" id="shortUrl" name="shortUrl" placeholder="Enter shortUrl:"/>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-sm btn-success">提交</button>
+    </div>
+  </form:form>
 </div>
 
 

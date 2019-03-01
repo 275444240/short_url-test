@@ -18,7 +18,12 @@ import java.io.IOException;
 @RequestMapping("/a")
 public class Acontroller {
 
-    //跳转
+    /**
+     * 跳转及次数统计
+     * @param url
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping(value = "/{url}", method = RequestMethod.GET)
     @ResponseBody
     public void url(@PathVariable String url, HttpServletResponse response) throws IOException {

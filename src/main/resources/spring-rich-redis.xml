@@ -32,9 +32,10 @@
     </bean>
 
     <!--redis util-->
+    <!--redis util-->
     <bean id="redisUtil" class="com.cenyol.example.utils.RedisUtil">
         <property name="shardedJedisPool" ref="shardedJedisPool"/>
-        <property name="use" value="${redis.useCache}"/>
-        <property name="defaultExpireTime" value="${redis.defaultExpireTime}"/>
+        <property name="use" value="true"/>
+        <property name="defaultExpireTime" value="100"/>
     </bean>
 </beans>
